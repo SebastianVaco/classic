@@ -41,14 +41,14 @@
 			    {/if}
 			{/block}
         <div class="current-price">
-          <span class='current-price-value' content="{$product.rounded_display_price}">
+			<span class='current-price-value' content="{$product.rounded_display_price}">
             {capture name='custom_price'}{hook h='displayProductPriceBlock' product=$product type='custom_price' hook_origin='product_sheet'}{/capture}
             {if '' !== $smarty.capture.custom_price}
               {$smarty.capture.custom_price nofilter}
             {else}
               ({$product.labels.tax_long} {$product.price})
             {/if}
-          </span>
+			</span>
 
           {if $product.has_discount}
             {if $product.discount_type === 'percentage'}
