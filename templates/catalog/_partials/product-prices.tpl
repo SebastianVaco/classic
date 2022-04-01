@@ -34,16 +34,19 @@
     {/block}
 
     {block name='product_price'}
-      <div
-        class="product-price h5 {if $product.has_discount}has-discount{/if}">
-
+      <div class="product-price h5 {if $product.has_discount}has-discount{/if}">
+			{block name='product_without_taxes'}
+			    {if $priceDisplay != 1}
+			        <p class="product-without-taxes">{l s='%price% tax excl.' d='Shop.Theme.Catalog' sprintf=['%price%' => Context::getContext()->currentLocale->formatPrice($product.price_tax_exc, $currency.iso_code)]}</p>
+			    {/if}
+			{/block}
         <div class="current-price">
           <span class='current-price-value' content="{$product.rounded_display_price}">
             {capture name='custom_price'}{hook h='displayProductPriceBlock' product=$product type='custom_price' hook_origin='product_sheet'}{/capture}
             {if '' !== $smarty.capture.custom_price}
               {$smarty.capture.custom_price nofilter}
             {else}
-              {$product.labels.tax_long} {$product.price}
+              ({$product.labels.tax_long} {$product.price})
             {/if}
           </span>
 
